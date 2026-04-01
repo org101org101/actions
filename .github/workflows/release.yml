@@ -9,6 +9,9 @@ on:
       crate:
         required: true
         type: string
+      ref:
+        required: true
+        type: string
 
 jobs:
   publish:
@@ -38,7 +41,7 @@ jobs:
         with:
           token: ${{ steps.app-token.outputs.token }}
           persist-credentials: false
-          ref: ${{ needs.check.outputs.ref }}
+          ref: ${{ inputs.ref }}
 
       - run: |
           git tag -a "${TAG}" -m "Release ${TAG}"
